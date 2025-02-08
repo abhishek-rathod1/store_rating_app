@@ -1,0 +1,20 @@
+<div id="<%= dom_id rating %>" class="card shadow-lg p-3 mb-3">
+  <div class="card-body">
+    <p>
+      <strong>User:</strong>
+      <%= rating.user.name.presence || "Unknown User" %> 
+      <span class="text-muted">(ID: <%= rating.user_id %>)</span>
+    </p>
+
+    <p>
+      <strong>Store:</strong>
+      <%= rating.store.name.presence || "Unknown Store" %>
+      <span class="text-muted">(ID: <%= rating.store_id %>)</span>
+    </p>
+
+    <p>
+      <strong>Score:</strong>
+      <span class="badge bg-success"><%= rating.score %> / 5</span>
+    </p>
+  </div>
+</div>

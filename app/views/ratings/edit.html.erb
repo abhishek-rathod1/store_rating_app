@@ -1,0 +1,36 @@
+<%= form_with(model: @rating, local: true, class: 'container mt-4') do |form| %>
+  <% if @rating.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@rating.errors.count, "error") %> prohibited this rating from being saved:</h4>
+      <ul>
+        <% @rating.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Store ID hidden field -->
+  <div hidden>
+    <%= form.hidden_field :store_id, value: @store.id %>
+  </div>
+
+  <!-- Rating score input -->
+  <div class="mb-3">
+    <%= form.label :score, class: 'form-label' %>
+    <div class="input-group">
+      <%= form.number_field :score, in: 1..5, value: @rating.score, class: 'form-control', aria: { label: "Rating Score" } %>
+      <span class="input-group-text"><i class="fa fa-star text-warning"></i></span>
+    </div>
+  </div>
+
+  <!-- Submit button -->
+  <div>
+    <%= form.submit "Update Rating", class: "btn btn-primary w-100 py-2" %>
+  </div>
+<% end %>
+
+<!-- Include FontAwesome for stars -->
+<%= content_for :head do %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<% end %>

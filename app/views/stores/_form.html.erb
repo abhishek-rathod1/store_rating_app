@@ -1,0 +1,37 @@
+<%= form_with(model: store, local: true, class: 'container mt-5') do |form| %>
+  <!-- Display error messages if any -->
+  <% if store.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(store.errors.count, "error") %> prohibited this store from being saved:</h4>
+      <ul>
+        <% store.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Name Input -->
+  <div class="mb-3">
+    <%= form.label :name, class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control', placeholder: 'Enter store name' %>
+  </div>
+
+  <!-- Email Input -->
+  <div class="mb-3">
+    <%= form.label :email, class: 'form-label' %>
+    <%= form.text_field :email, class: 'form-control', placeholder: 'Enter store email' %>
+  </div>
+
+  <!-- Address Input -->
+  <div class="mb-3">
+    <%= form.label :address, class: 'form-label' %>
+    <%= form.text_field :address, class: 'form-control', placeholder: 'Enter store address' %>
+  </div>
+
+  <!-- Submit Button -->
+  <div>
+    <%= form.submit "Submit", class: "btn btn-success w-100 py-2" %>
+  </div>
+<% end %>
+

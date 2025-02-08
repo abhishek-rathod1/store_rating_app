@@ -1,0 +1,98 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Stores" %>
+
+<h1>Stores</h1>
+
+<!-- Search Form -->
+<%= form_tag(stores_path, method: :get, class: "mb-3") do %>
+  <div class="input-group">
+    <%= text_field_tag :search, params[:search], placeholder: "Search by store name or address", class: "form-control" %>
+    <div class="input-group-append">
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Store Name</th>  
+      <th>Address</th>  
+      <th>Overall Ratings</th>
+      <th>My Submitted Rating</th>
+      <th>Submit Rating</th>
+      <th>Modify Rating</th>  
+    </tr>
+  </thead>
+  <tbody>
+    <% @stores.each do |store| %>
+      <tr>
+        <td><%= store.name %></td>
+        <td><%= store.address %></td>
+        
+        <!-- Display Overall Rating -->
+        <td>
+          <% average_rating = store.ratings.average(:score).to_f || 0 %>
+          <%= number_to_percentage(average_rating * 20, precision: 1) %> % (out of 5)
+          <% 5.times do |i| %>
+            <% if i < average_rating %>
+              <i class="fa fa-star text-warning"></i> <!-- Filled Star -->
+            <% else %>
+              <i class="fa fa-star text-secondary"></i> <!-- Empty Star -->
+            <% end %>
+          <% end %>
+        </td>
+
+        <!-- Display User's Rating for the Store -->
+        <td>
+          <% user_rating = store.ratings.where(user_id: current_user.id).first %>
+
+          
+          <% if user_rating %>
+            <!-- Display the user's rating -->
+            <%= user_rating.score %> / 5
+            <% 5.times do |i| %>
+              <% if i < user_rating.score %>
+                <i class="fa fa-star text-warning"></i> <!-- Filled Star -->
+              <% else %>
+                <i class="fa fa-star text-secondary"></i> <!-- Empty Star -->
+              <% end %>
+            <% end %>
+          <% else %>
+            <!-- No rating from the current user -->
+            <span>No rating yet</span>
+          <% end %>
+        </td>
+
+        <!-- Option to Submit Rating -->
+        <td>
+          <% if user_rating %>
+            <!-- Rating already exists, don't allow adding again -->
+            <span>Rating Submitted</span>
+          <% else %>
+            <%= link_to "Submit Rating", new_rating_path(store_id: store.id), class: "btn btn-primary" %>
+          <% end %>
+        </td>
+
+        <!-- Option to Modify Rating -->
+        <td>
+          <% if user_rating %>
+            <!-- Modify Rating if already rated -->
+            <%= link_to "Modify Rating", edit_rating_path(user_rating), class: "btn btn-warning" %>
+          <% else %>
+            <!-- No rating to modify -->
+            <span>N/A</span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<!-- Include FontAwesome for Stars -->
+<%= content_for :head do %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<% end %>

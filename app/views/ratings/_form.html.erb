@@ -1,0 +1,76 @@
+<%= form_with(model: rating, class: "rating-form") do |form| %>
+  <% if rating.errors.any? %>
+    <div class="alert alert-danger">
+      <h5><%= pluralize(rating.errors.count, "error") %> prohibited this rating from being saved:</h5>
+      <ul>
+        <% rating.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Hidden Fields for user_id and store_id -->
+  <div hidden>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <%= form.hidden_field :store_id, value: params[:store_id] %>
+  </div>
+
+  <!-- Rating Score Field -->
+  <div class="form-group">
+    <%= form.label :score, class: "form-label" %>
+    <%= form.number_field :score, in: 1..5, step: 1, class: "form-control", placeholder: "Enter a rating between 1 and 5" %>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="form-group">
+    <%= form.submit "Submit Rating", class: "btn btn-success btn-lg" %>
+  </div>
+<% end %>
+
+<!-- Include FontAwesome for Icons if needed -->
+<%= content_for :head do %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<% end %>
+
+<!-- Add CSS Styling for Improved Layout -->
+<style>
+  .rating-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  .form-control {
+    font-size: 1rem;
+    padding: 8px;
+    border-radius: 4px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    border-radius: 5px;
+  }
+</style>
