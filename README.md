@@ -1,59 +1,65 @@
-# Store Rating Web Application
+# Store Rating App
 
 ## Overview
-This is a **Ruby on Rails** web application that allows users to rate stores based on their experience. Users can sign up, log in, and submit ratings, while admins can manage users and reviews. The project utilizes **Devise for authentication**, along with **Bootstrap** for styling.
+The **Store Rating App** is a web application built using Ruby on Rails that allows users to rate and review stores. The app provides different functionalities based on user roles, including standard users and administrators.
 
 ## Features
-- **User Authentication:** Users can register, log in, and manage their profiles.
-- **Role-Based Access:** Users and admins have different permissions.
-- **Store Ratings:** Users can rate stores with a score.
-- **Admin Panel:** Admins can promote users to admin and delete accounts.
-- **Bootstrap UI:** Styled using Bootstrap for a clean and responsive design.
-
-## Tech Stack
-- **Backend:** Ruby on Rails
-- **Database:** SQLite (Development)
-- **Authentication:** Devise
-- **Frontend:** ERB, Bootstrap
+- **User Authentication** (Sign Up, Login, Logout)
+- **Store Ratings & Reviews**
+- **Admin Dashboard** for managing stores and users
+- **Role-based Access Control**
+- **Responsive UI** using Bootstrap
 
 ## Installation
-1. **Clone the repository:**
-   ```sh
-   git clone https://github.com/abhishek-rathod1/store_rating_app.git
-   cd store_rating_app
-   ```
-2. **Install dependencies:**
-   ```sh
-   bundle install
-   ```
-3. **Set up the database:**
-   ```sh
-   rails db:create db:migrate db:seed
-   ```
-4. **Run the Rails server:**
-   ```sh
-   rails server
-   ```
-5. **Visit the app in your browser:**
-   ```
-   http://localhost:3000
-   ```
+
+### Prerequisites
+Ensure you have the following installed:
+- Ruby (>= 3.0)
+- Rails (>= 7.0)
+- PostgreSQL (or SQLite for local development)
+
+### Setup
+```sh
+# Clone the repository
+git clone https://github.com/abhishek-rathod1/store_rating_app.git
+cd store_rating_app
+
+# Install dependencies
+bundle install
+
+# Set up the database
+rails db:create
+rails db:migrate
+rails db:seed
+
+# Start the server
+rails server
+```
 
 ## Usage
-- **Sign up or log in** to rate stores.
-- **Admins** can promote users and manage ratings.
-- **Users** can submit and edit ratings.
+
+### Accessing the Application
+- Visit `http://localhost:3000/` to access the homepage.
+- Users can sign up or log in to rate stores.
+
+### Admin Credentials
+To log in as an admin, use the following credentials:
+- **Email:** `admin@admin.com`
+- **Password:** `admin@123`
+
+The admin has access to `/admin/dashboard` to manage users and store ratings.
 
 ## Contributing
+If you'd like to contribute:
 1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Commit changes (`git commit -m 'Add feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Create a Pull Request.
+2. Create a new branch: `git checkout -b feature-name`
+3. Commit your changes: `git commit -m 'Add feature'`
+4. Push to the branch: `git push origin feature-name`
+5. Submit a pull request.
 
 ## License
-This project is open-source and available under the **MIT License**.
+This project is licensed under the MIT License.
 
 ## Contact
-For any inquiries, reach out to abhir4702@gmail.com , https://github.com/abhishek-rathod1
+For any queries or support, reach out via GitHub issues or email at `abhir4702@gmail.com`.
 
